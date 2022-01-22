@@ -24,11 +24,19 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app)
 
-// Detect auth state
-onAuthStateChanged(auth, user => {
-  if (user != null) {
-    console.log('logged in!');
-  } else {
-    console.log('no user!');
-  }
-});
+// // Detect auth state
+// onAuthStateChanged(auth, user => {
+//   if (user != null) {
+//     console.log('logged in!');
+//   } else {
+//     console.log('no user!');
+//   }
+// });
+
+// async function getGrowers(db) {
+//   const growersCol = collection(db, 'growers');
+//   const growerSnapshot = await getDocs(growersCol);
+//   const growerList = growerSnapshot.docs.map(doc => doc.data());
+//   console.log(growerList);
+//   return growerList;
+// }
