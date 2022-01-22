@@ -1,10 +1,8 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+The purpose of this software is to keep a log of all the growers and farmers that we work with at the company that I currently work for. It is designed to be a simple index of the growers, ID numbers, cellars, yields, crop variety and so on. Currently the software has a few test growers contained in the database, and there is the ability to add, update, remove, and query the database from the application.
 
-{Provide a description the software that you wrote and how it integrates with a Cloud Database.  Describe how to use your program.}
-
-{Describe your purpose for writing this software.}
+My purpose for writing this software was to learn more about Google Firebase/Firestore, and to be able to provide a helpful tool at work. Even though we have databases and such currently, it is nice to be able to log a simple index of the crucial information.
 
 {Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running, a walkthrough of the code, and a view of the cloud database.}
 
@@ -12,20 +10,19 @@
 
 # Cloud Database
 
-{Describe the cloud database you are using.}
+I am using Google Firebase along side Google Firestore.
 
-{Describe the structure of the database that you created.}
+The structure of my databse revolves around a central collection of 'growers' and then within the growers there are unique documents. Each one of these documents is associated with a grower and the different pieces of information about them, such as: grower_id, grower_name, grower_variety, grower_yield, etc.
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+This project is developed in VSCode while using the Firebase tools to locally host the database in order to test functionality.
 
-{Describe the programming language that you used and any libraries.}
+I used HTML and CSS for the form and its appearance, and then JavaScript for all of the databse interaction.
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
+* [Google Firebase Docs](https://firebase.google.com/docs)
 * [Web Site Name](http://url.link.goes.here)
 
 # Future Work
