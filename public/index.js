@@ -14,3 +14,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 console.log("Hello, Firestore!")
+
+var growerNameDisplay = document.querySelector(".grower-name");
+var growerCodeDisplay = document.querySelector(".grower-code");
+var editGrowerBtn = document.getElementById("edit");
+var deleteGrowerBtn = document.getElementById("delete");
+var addGrowerBtn = document.getElementById("add");

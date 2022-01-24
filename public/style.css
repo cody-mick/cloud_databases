@@ -1,0 +1,35 @@
+.grower-data {
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  background-color: aliceblue;
+}
+
+body {
+  background-color: rgb(226, 226, 226);
+}
+
+button:hover {
+  cursor: pointer;
+  border-color: rgba(255,255,255,1);
+}
+
+button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid #2c3d55;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  background-color: #255f85;
+  color: #ffffff;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  text-align: center;
+  transition: all 0.2s;
+}
