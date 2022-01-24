@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { doc, setDoc, deleteDoc, collection, query, where, getDoc} from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -20,3 +21,23 @@ var growerCodeDisplay = document.querySelector(".grower-code");
 var editGrowerBtn = document.getElementById("edit");
 var deleteGrowerBtn = document.getElementById("delete");
 var addGrowerBtn = document.getElementById("add");
+
+//TODOs:
+
+function addRecords() {
+  // Adding records to the database
+  let name = growerNameDisplay.value;
+  let code = growerCodeDisplay.value;
+}
+
+function retrieveRecords() {
+  // Retrieving records from the database
+}
+
+function deleteRecords() {
+  // Deleting records from the database
+}
+
+function editRecords() {
+  // Editing a record in the database
+}
