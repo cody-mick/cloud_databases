@@ -6,7 +6,7 @@ My purpose for writing this software was to learn more about Google Firebase/Fir
 
 Code walkthrough and demo video :point_down:
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/QhUhl8JSG0w)
 
 # Cloud Database
 
