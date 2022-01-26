@@ -4,7 +4,7 @@ The purpose of this software is to keep a log of all the growers and farmers tha
 
 My purpose for writing this software was to learn more about Google Firebase/Firestore, and to be able to provide a helpful tool at work. Even though we have databases and such currently, it is nice to be able to log a simple index of the crucial information.
 
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running, a walkthrough of the code, and a view of the cloud database.}
+Code walkthrough and demo video :point_down:
 
 [Software Demo Video](http://youtube.link.goes.here)
 
@@ -23,11 +23,14 @@ I used HTML and CSS for the form and its appearance, and then JavaScript for all
 # Useful Websites
 
 * [Google Firebase Docs](https://firebase.google.com/docs)
-* [Web Site Name](http://url.link.goes.here)
+* [W3 Schools JavaScript](https://www.w3schools.com/js/)
+* [YouTube Fireship.io](https://www.youtube.com/c/Fireship)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+The project is in a minimally functional state. The 4 basic components of adding, editing, deleting, and simple queries are in place. Future work includes these items:
+
+* Multiple tables for more complex queries
+* User authentication to increase security
+* Putting the JS in its own file. As it currently stands, the only way I got things working was using script tags on the HTML page. Which I know is not best practices.
+* Mastering security rules within the Firebase console.

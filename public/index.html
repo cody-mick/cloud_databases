@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html">
     <link rel="stylesheet" href="style.css">
     <title>Grower Codes Database</title>
 </head>
@@ -11,12 +12,17 @@
     <main>
         <div class="grower-data">
             <h1>Grower Database</h1>
-            <div class="search-bar"> <!--Section for queries-->
-                <input type="text" placeholder="Search for a Grower...">
+            <div class="search-area"> <!--Section for queries-->
+                <input class="search-bar" type="text" placeholder="Search for a Grower...">
+                <input type="radio" name="search-by" id="grower-name-button" value="grower_name">
+                <label for="grower-name">Grower Name</label>
+                <input type="radio" name="search-by" id="grower-id-button" value="grower-id">
+                <label for="grower-id">Grower Code</label>
+                <button id="search">Search</button>
             </div>
             <div class="grower-info">
-                <p class="grower-name">grower name appear here</p>
-                <p class="grower-code">grower code appear here</p>
+                <p>Grower Name: <span class="grower-name"></span></p>
+                <p>Grower Code: <span class="grower-code"></span></p>
                 <button id="edit"> <!--Edit Data-->
                     Edit Grower Information
                 </button>
@@ -26,14 +32,144 @@
             </div>
             <div class="new-grower">
                 <p>Add a new grower to the database</p>
-                <input type="text" placeholder="Grower Name">
-                <input type="text" placeholder="Grower Code">
+                <input class="new-name" type="text" placeholder="Grower Name">
+                <input class="new-code" type="text" placeholder="Grower Code">
                 <button id="add"><!--Add Data-->
                     Add Grower
                 </button>
             </div>
         </div>
     </main>
-    <script type="module" src="index.js"></script>
+    <!-- <script type="module" src="index.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyB6S9JeKOaYiWiuBpLWwDUTLn9S2uz2BBs",
+          authDomain: "grower-codes.firebaseapp.com",
+          projectId: "grower-codes",
+          storageBucket: "grower-codes.appspot.com",
+          messagingSenderId: "669430447435",
+          appId: "1:669430447435:web:0a7e9cb1af9d1a4a40fcce",
+          measurementId: "G-VRFNH1Z5QY"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        console.log(firebase);
+        firebase.initializeApp(firebaseConfig);
+
+        // Function for adding new items to the database.
+        let addBtn = document.getElementById("add");
+        addBtn.onclick = function addRecords() {
+            var db = firebase.firestore();
+            let newName = document.querySelector(".new-name");
+            let newCode = document.querySelector(".new-code");
+            db.collection("growers").doc(`${newCode.value}`).set({
+                grower_name: `${newName.value}`,
+                grower_id: newCode.value
+            }
+            ).then(() => {
+                console.log("Document successfully written!");
+                newName.value = "";
+                newCode.value = "";
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }
+
+        // Function for search functionality
+        let searchBtn = document.getElementById("search");
+        searchBtn.onclick = function queryDatabase() {
+            var db = firebase.firestore();
+            let searchName = document.querySelector(".search-bar");
+            let nameDisplay = document.querySelector(".grower-name");
+            let codeDisplay = document.querySelector(".grower-code");
+            let nameFilter = document.getElementById("grower-name-button");
+            let numberFilter = document.getElementById("grower-id-button");
+            let growersRef = db.collection("growers");
+
+            if (nameFilter.checked) {
+                growersRef.where("grower_name", "==", `${searchName.value}`)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.data().grower_name);
+                        nameDisplay.textContent = doc.data().grower_name;
+                        codeDisplay.textContent = doc.data().grower_id;
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            } else {
+                growersRef.where("grower_id", "==", `${searchName.value}`)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.data().grower_name);
+                        nameDisplay.textContent = doc.data().grower_name;
+                        codeDisplay.textContent = doc.data().grower_id;
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            }
+        }
+
+        // Function to delete items from the database
+        let deleteBtn = document.getElementById("delete");
+        deleteBtn.onclick = function deleteItem() {
+            var db = firebase.firestore();
+            let growerName = document.querySelector(".grower-name");
+            let growerCode = document.querySelector(".grower-code");
+            let searchName = document.querySelector(".search-bar");
+
+            console.log(searchName.value);
+
+            let confirmation = confirm("Deleting records cannot be undone. Are you sure you want to continue?")
+            if (confirmation) {
+                db.collection("growers").doc(`${searchName.value}`).delete().then(() => {
+                    console.log("Document successfully deleted!");
+                    growerName.textContent = "";
+                    growerCode.textContent = "";
+                    searchName.value = "";
+                }).catch((error) => {
+                    console.error("Error removing document: ", error);
+                });
+            }
+        }
+
+        // Function to edit grower information in the database
+        let editBtn = document.getElementById("edit");
+        editBtn.onclick = function editInfo() {
+            var db = firebase.firestore();
+            let growerName = document.querySelector(".grower-name");
+            let growerCode = document.querySelector(".grower-code");
+
+            if (growerName.textContent != "") {
+                alert("Only the name of a grower can be changed. If the ID needs to be changed, please create a new record.")
+                let updatedName = prompt("Enter new grower name:", "Grower Name");
+                db.collection("growers").doc(`${growerCode.textContent}`).set({
+                    grower_name: `${updatedName}`,
+                    grower_code: `${growerCode.textContent}`
+                });
+            } else {
+                alert("You must have a grower selected in order to edit the information!");
+            }
+        }
+      </script>
 </body>
 </html>
